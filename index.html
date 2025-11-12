@@ -2,64 +2,115 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LegacyRefactor.ai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f9fafb;
+      background-color: #ffffff;
       color: #222;
       margin: 0;
       padding: 0;
       text-align: center;
     }
+
     header {
-      background-color: #e8f5e9;
-      padding: 40px 0;
+      background-color: #f4f8f6;
+      padding: 60px 20px 40px;
     }
+
     h1 {
-      color: #32cd32;
-      font-size: 36px;
-      margin-bottom: 10px;
+      color: #2ecc71;
+      font-size: 40px;
+      margin: 0 0 10px;
     }
-    h2 {
+
+    header p {
+      font-size: 18px;
       color: #444;
+      margin: 0;
     }
+
     section {
-      padding: 40px 20px;
+      padding: 50px 20px;
     }
+
+    h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    p {
+      line-height: 1.5;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+
     .plans {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 20px;
-      margin-top: 40px;
+      gap: 30px;
+      margin-top: 30px;
     }
+
     .plan {
-      background: white;
-      border-radius: 10px;
+      background: #ffffff;
+      border-radius: 12px;
       width: 280px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 24px 20px 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-sizing: border-box;
     }
+
+    .plan:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+
     .plan h3 {
       margin-top: 0;
+      margin-bottom: 10px;
+      color: #2ecc71;
+      font-size: 20px;
     }
+
+    .plan p {
+      max-width: 100%;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #444;
+    }
+
     .price {
       font-weight: bold;
-      font-size: 1.2em;
+      font-size: 18px;
+      margin-bottom: 18px;
+      color: #111;
     }
+
     .button {
       display: inline-block;
-      background-color: #635bff;
-      color: white;
+      background-color: #2ecc71;
+      color: #ffffff;
       padding: 10px 20px;
-      border-radius: 6px;
+      border-radius: 8px;
       text-decoration: none;
-      margin-top: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      transition: background-color 0.2s ease;
     }
+
     .button:hover {
-      background-color: #5145cd;
+      background-color: #27ae60;
+    }
+
+    footer {
+      font-size: 12px;
+      color: #888;
+      padding: 20px;
     }
   </style>
 </head>
@@ -71,33 +122,50 @@
 
   <section>
     <h2>What We Do</h2>
-    <p>We use advanced AI tools to analyze, refactor, and modernize old software systems. LegacyRefactor.ai helps small teams, startups, and enterprises safely upgrade outdated code, remove deprecated dependencies, and improve performance without downtime.</p>
+    <p>
+      We use advanced AI-assisted tooling to analyze, refactor, and modernize old software systems.
+      LegacyRefactor.ai helps small teams, startups, and enterprises safely upgrade outdated code,
+      remove deprecated dependencies, and improve performance without downtime.
+    </p>
   </section>
 
   <section>
     <h2>Choose Your Plan</h2>
     <div class="plans">
+      <!-- Plan 1 -->
       <div class="plan">
         <h3>Codebase Assessment</h3>
-        <p>Get a detailed modernization report for your repo.</p>
-        <p class="price">$99.99</p>
-        <a href="https://buy.stripe.com/test_eVq14pdbD49G9rN8ua1wY01" class="button">Start Assessment</a>
+        <p>We scan your repository and send you a concise report outlining risks, modernization opportunities, and a prioritized action plan.</p>
+        <div class="price">$99.99</div>
+        <a class="button" href="https://buy.stripe.com/test_eVq14pdbD49G9rN8ua1wY01">
+          Start Assessment
+        </a>
       </div>
 
+      <!-- Plan 2 -->
       <div class="plan">
         <h3>Refactor Sprint</h3>
-        <p>We upgrade and optimize your core modules in under a week.</p>
-        <p class="price">$499.99</p>
-        <a href="https://buy.stripe.com/test_cNi28tfjL9u033p9ye1wY02" class="button">Start Sprint</a>
+        <p>We upgrade and optimize your core modules in a focused sprint using safe, reviewable changes.</p>
+        <div class="price">$499.99</div>
+        <a class="button" href="https://buy.stripe.com/test_cNi28tfjL9u033p9ye1wY02">
+          Book Sprint
+        </a>
       </div>
 
+      <!-- Plan 3 -->
       <div class="plan">
         <h3>Managed Modernization</h3>
-        <p>Full-service AI-powered modernization — we handle everything end to end.</p>
-        <p class="price">$999.99</p>
-        <a href="https://buy.stripe.com/test_cNi00l3B36hO47tfWC1wY03" class="button">Get Started</a>
+        <p>End-to-end modernization: architecture review, phased refactors, testing, and performance tuning for larger systems.</p>
+        <div class="price">$999.99</div>
+        <a class="button" href="https://buy.stripe.com/test_cNi00l3B36hO47tfWC1wY03">
+          Get Started
+        </a>
       </div>
     </div>
   </section>
+
+  <footer>
+    Payments handled securely by Stripe. You will be contacted at your checkout email with onboarding instructions.
+  </footer>
 </body>
 </html>
