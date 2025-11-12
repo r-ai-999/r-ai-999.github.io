@@ -5,24 +5,33 @@
   <title>LegacyRefactor.ai</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    :root {
+      --brand-green: #7fffb3;
+      --bg-dark: #0d0d0d;
+      --card-dark: #1a1a1a;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background-color: #ffffff;
       color: #222;
       margin: 0;
       padding: 0;
       text-align: center;
+      line-height: 1.6;
     }
 
     header {
-      background-color: #f4f8f6;
+      background: linear-gradient(to bottom, #f6fef9, #ffffff);
       padding: 60px 20px 40px;
     }
 
     h1 {
-      color: #2ecc71;
-      font-size: 40px;
+      color: var(--brand-green);
+      font-size: 42px;
       margin: 0 0 10px;
+      font-weight: 700;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     header p {
@@ -47,70 +56,101 @@
       max-width: 800px;
     }
 
+    /* Dark section */
+    .dark-section {
+      background: var(--bg-dark);
+      color: white;
+      padding: 70px 20px;
+    }
+
+    .dark-section h2 {
+      font-size: 2em;
+      margin-bottom: 40px;
+      color: var(--brand-green);
+      text-shadow:
+        0 2px 4px rgba(0,0,0,0.3),
+        0 0 6px rgba(127,255,179,0.25);
+      letter-spacing: 0.5px;
+    }
+
     .plans {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
-      margin-top: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .plan {
-      background: #ffffff;
+      background: var(--card-dark);
       border-radius: 12px;
-      width: 280px;
-      padding: 24px 20px 30px;
+      padding: 30px;
+      width: 300px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       box-sizing: border-box;
     }
 
     .plan:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
     }
 
     .plan h3 {
+      color: var(--brand-green);
+      font-size: 20px;
       margin-top: 0;
       margin-bottom: 10px;
-      color: #2ecc71;
-      font-size: 20px;
     }
 
     .plan p {
-      max-width: 100%;
-      margin-bottom: 16px;
       font-size: 14px;
-      color: #444;
+      color: #ccc;
+      margin-bottom: 16px;
     }
 
     .price {
       font-weight: bold;
       font-size: 18px;
+      color: #fff;
       margin-bottom: 18px;
-      color: #111;
     }
 
     .button {
       display: inline-block;
-      background-color: #2ecc71;
-      color: #ffffff;
-      padding: 10px 20px;
+      background-color: var(--brand-green);
+      color: #0d0d0d;
+      padding: 12px 22px;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
-      transition: background-color 0.2s ease;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.25s ease;
+      box-shadow: 0 0 8px rgba(127,255,179,0.35);
     }
 
     .button:hover {
-      background-color: #27ae60;
+      background-color: #6defa3;
+      box-shadow: 0 0 12px rgba(127,255,179,0.55);
+      transform: translateY(-2px);
     }
 
     footer {
-      font-size: 12px;
-      color: #888;
-      padding: 20px;
+      background: #0d0d0d;
+      color: #aaa;
+      font-size: 13px;
+      padding: 25px;
+    }
+
+    @media (max-width: 700px) {
+      .plans {
+        flex-direction: column;
+        align-items: center;
+      }
+      .plan {
+        width: 90%;
+      }
     }
   </style>
 </head>
@@ -129,64 +169,40 @@
     </p>
   </section>
 
-  <section style="text-align:center; padding:60px 20px; background:#0d0d0d; color:white;">
-  <h2
-  style="
-    font-size:2em;
-    margin-bottom:40px;
-    color:#7fffb3;
-    text-shadow:
-      0 2px 4px rgba(0,0,0,0.3),
-      0 0 6px rgba(127,255,179,0.25);
-    letter-spacing:0.5px;
-  ">
-  Choose Your Plan
-</h2>
+  <section class="dark-section">
+    <h2>Choose Your Plan</h2>
 
+    <div class="plans">
 
+      <div class="plan">
+        <h3>Codebase Assessment</h3>
+        <p>Get a detailed modernization report for your repo.</p>
+        <div class="price">$99.99</div>
+        <a href="https://buy.stripe.com/00w4gy5XA3cw6ul5RK3cc03" target="_blank" rel="noopener" class="button">
+          Start Assessment
+        </a>
+      </div>
 
+      <div class="plan">
+        <h3>Refactor Sprint</h3>
+        <p>We upgrade and optimize your core modules in under a week.</p>
+        <div class="price">$499.99</div>
+        <a href="https://buy.stripe.com/9B600i71E7sMaKBfsk3cc02" target="_blank" rel="noopener" class="button">
+          Start Sprint
+        </a>
+      </div>
 
-  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; max-width:1000px; margin:0 auto;">
+      <div class="plan">
+        <h3>Managed Modernization</h3>
+        <p>End-to-end modernization service with dedicated AI oversight.</p>
+        <div class="price">$999.99</div>
+        <a href="https://buy.stripe.com/8x2aEW71E28scSJa803cc01" target="_blank" rel="noopener" class="button">
+          Get Started
+        </a>
+      </div>
 
-    <!-- Codebase Assessment -->
-    <div style="background:#1a1a1a; border-radius:12px; padding:30px; width:300px;">
-      <h3 style="color:#7fffb3;">Codebase Assessment</h3>
-      <p>Get a detailed modernization report for your repo.</p>
-      <h4>$99.99</h4>
-      <a href="https://buy.stripe.com/00w4gy5XA3cw6ul5RK3cc03"
-         target="_blank" rel="noopener"
-         style="display:inline-block; margin-top:15px; background:#00c776; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">
-         Start Assessment
-      </a>
     </div>
-
-    <!-- Refactor Sprint -->
-    <div style="background:#1a1a1a; border-radius:12px; padding:30px; width:300px;">
-      <h3 style="color:#7fffb3;">Refactor Sprint</h3>
-      <p>We upgrade and optimize your core modules in under a week.</p>
-      <h4>$499.99</h4>
-      <a href="https://buy.stripe.com/9B600i71E7sMaKBfsk3cc02"
-         target="_blank" rel="noopener"
-         style="display:inline-block; margin-top:15px; background:#00c776; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">
-         Start Sprint
-      </a>
-    </div>
-
-    <!-- Managed Modernization -->
-    <div style="background:#1a1a1a; border-radius:12px; padding:30px; width:300px;">
-      <h3 style="color:#7fffb3;">Managed Modernization</h3>
-      <p>End-to-end modernization service with dedicated AI oversight.</p>
-      <h4>$999.99</h4>
-      <a href="https://buy.stripe.com/8x2aEW71E28scSJa803cc01"
-         target="_blank" rel="noopener"
-         style="display:inline-block; margin-top:15px; background:#00c776; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">
-         Get Started
-      </a>
-    </div>
-
-  </div>
-</section>
-
+  </section>
 
   <footer>
     Payments handled securely by Stripe. You will be contacted at your checkout email with onboarding instructions.
