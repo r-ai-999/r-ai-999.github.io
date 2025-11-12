@@ -1,47 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- SEO + Social Meta -->
+  <meta name="title" content="LegacyRefactor.ai – AI-Powered Legacy Code Modernization" />
+  <meta name="description" content="Automated AI refactoring for outdated codebases. Upgrade your software with clean, efficient, modern code — faster than ever." />
+  <meta name="keywords" content="AI refactoring, legacy code, modernization, software upgrade, codebase optimization, tech debt, automation" />
+  <meta name="author" content="LegacyRefactor.ai" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://r-ai-999.github.io/" />
+  <meta property="og:title" content="LegacyRefactor.ai – AI-Powered Legacy Code Modernization" />
+  <meta property="og:description" content="Modernize your legacy codebases with AI – faster, safer, and fully automated." />
+  <meta property="og:image" content="https://r-ai-999.github.io/favicon.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://r-ai-999.github.io/" />
+  <meta property="twitter:title" content="LegacyRefactor.ai – AI-Powered Legacy Code Modernization" />
+  <meta property="twitter:description" content="AI-assisted modernization for legacy software systems – clean, fast, and reliable." />
+  <meta property="twitter:image" content="https://r-ai-999.github.io/favicon.png" />
+
+  <!-- Favicon + Theme Color -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="theme-color" content="#0d0d0d" />
+
+  <title>LegacyRefactor.ai</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>LegacyRefactor.ai — AI-Driven Code Modernization</title>
-  <meta name="description" content="AI-powered modernization for legacy codebases — faster, cleaner, and future-ready." />
-  <meta property="og:title" content="LegacyRefactor.ai — AI-Driven Code Modernization" />
-  <meta property="og:description" content="We use advanced AI tools to analyze, refactor, and modernize legacy software with zero downtime." />
-  <meta property="og:image" content="https://r-ai-999.github.io/legacyrefactor_site/favicon.png" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-<link rel="icon" type="image/png" href="favicon.png">
+  <!-- ✅ Favicons for all browsers -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
+  <!-- ✅ Optional theme tweaks for better appearance in dark tabs and mobile -->
+  <meta name="theme-color" content="#0d0d0d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="favicon.png">
 
   <style>
-    :root {
-      --brand-green: #34d399; /* richer emerald */
-      --bg-dark: #0d0d0d;
-      --card-dark: #1a1a1a;
-    }
-
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: Arial, sans-serif;
       background-color: #ffffff;
       color: #222;
       margin: 0;
       padding: 0;
       text-align: center;
-      line-height: 1.6;
     }
 
     header {
-      background: linear-gradient(to bottom, #f6fef9, #ffffff);
+      background-color: #f4f8f6;
       padding: 60px 20px 40px;
     }
 
     h1 {
-      color: var(--brand-green);
-      font-size: 42px;
+      color: #29b36a; /* Deepened green for better visibility */
+      font-size: 40px;
       margin: 0 0 10px;
-      font-weight: 700;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
     header p {
@@ -66,156 +80,70 @@
       max-width: 800px;
     }
 
-    /* Dark section */
-    .dark-section {
-      background: var(--bg-dark);
-      color: white;
-      padding: 70px 20px;
-    }
-
-    .dark-section h2 {
-      font-size: 2em;
-      margin-bottom: 40px;
-      color: var(--brand-green);
-      text-shadow:
-        0 2px 4px rgba(0,0,0,0.4),
-        0 0 8px rgba(52,211,153,0.4);
-      letter-spacing: 0.5px;
-    }
-
     .plans {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 30px;
-      max-width: 1000px;
-      margin: 0 auto;
+      margin-top: 30px;
     }
 
     .plan {
-      background: var(--card-dark);
+      background: #ffffff;
       border-radius: 12px;
-      padding: 30px;
-      width: 300px;
+      width: 280px;
+      padding: 24px 20px 30px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.08);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       box-sizing: border-box;
     }
 
     .plan:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     }
 
     .plan h3 {
-      color: var(--brand-green);
-      font-size: 20px;
       margin-top: 0;
       margin-bottom: 10px;
+      color: #29b36a; /* same deep green */
+      font-size: 20px;
     }
 
     .plan p {
-      font-size: 14px;
-      color: #ccc;
+      max-width: 100%;
       margin-bottom: 16px;
+      font-size: 14px;
+      color: #444;
     }
 
     .price {
       font-weight: bold;
       font-size: 18px;
-      color: #fff;
       margin-bottom: 18px;
+      color: #111;
     }
 
     .button {
       display: inline-block;
-      background-color: var(--brand-green);
-      color: #0d0d0d;
-      padding: 12px 22px;
+      background-color: #29b36a;
+      color: #ffffff;
+      padding: 10px 20px;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 15px;
-      transition: all 0.25s ease;
-      box-shadow: 0 0 8px rgba(52,211,153,0.4);
+      font-weight: bold;
+      font-size: 14px;
+      transition: background-color 0.2s ease;
     }
 
     .button:hover {
-      background-color: #2bb889;
-      box-shadow: 0 0 12px rgba(52,211,153,0.6);
-      transform: translateY(-2px);
+      background-color: #1f9a59;
     }
 
     footer {
-      background: #0d0d0d;
-      color: #aaa;
-      font-size: 13px;
-      padding: 25px;
-    }
-
-    @media (max-width: 700px) {
-      .plans {
-        flex-direction: column;
-        align-items: center;
-      }
-      .plan {
-        width: 90%;
-      }
+      font-size: 12px;
+      color: #888;
+      padding: 20px;
     }
   </style>
 </head>
-<body>
-  <header>
-    <h1>LegacyRefactor.ai</h1>
-    <p>AI-powered modernization for legacy codebases — faster, cleaner, and future-ready.</p>
-  </header>
-
-  <section>
-    <h2>What We Do</h2>
-    <p>
-      We use advanced AI-assisted tooling to analyze, refactor, and modernize old software systems.
-      LegacyRefactor.ai helps small teams, startups, and enterprises safely upgrade outdated code,
-      remove deprecated dependencies, and improve performance without downtime.
-    </p>
-  </section>
-
-  <section class="dark-section">
-    <h2>Choose Your Plan</h2>
-
-    <div class="plans">
-
-      <div class="plan">
-        <h3>Codebase Assessment</h3>
-        <p>Get a detailed modernization report for your repo.</p>
-        <div class="price">$99.99</div>
-        <a href="https://buy.stripe.com/00w4gy5XA3cw6ul5RK3cc03" target="_blank" rel="noopener" class="button">
-          Start Assessment
-        </a>
-      </div>
-
-      <div class="plan">
-        <h3>Refactor Sprint</h3>
-        <p>We upgrade and optimize your core modules in under a week.</p>
-        <div class="price">$499.99</div>
-        <a href="https://buy.stripe.com/9B600i71E7sMaKBfsk3cc02" target="_blank" rel="noopener" class="button">
-          Start Sprint
-        </a>
-      </div>
-
-      <div class="plan">
-        <h3>Managed Modernization</h3>
-        <p>End-to-end modernization service with dedicated AI oversight.</p>
-        <div class="price">$999.99</div>
-        <a href="https://buy.stripe.com/8x2aEW71E28scSJa803cc01" target="_blank" rel="noopener" class="button">
-          Get Started
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <footer>
-    Payments handled securely by Stripe. You will be contacted at your checkout email with onboarding instructions.
-  </footer>
-</body>
-</html>
