@@ -4,22 +4,22 @@
   <meta charset="UTF-8" />
 
   <!-- SEO INFO -->
-  <title>LegacyRefactor.ai – Modern Website Audits & Redesigns</title>
-  <meta name="description" content="Modern audits, redesigns, and social-to-site automation that elevate your business and upgrade outdated websites." />
-  <meta name="keywords" content="website redesign, website audit, UI modernizing, business website upgrade, brand refresh" />
+  <title>LegacyRefactor.ai – Modern Websites & Legacy Code Upgrades</title>
+  <meta name="description" content="Modern website audits & redesigns plus legacy code modernization. Clean, fast upgrades for your online presence and backend systems." />
+  <meta name="keywords" content="website redesign, website audit, legacy code, code modernization, brand refresh, software upgrade" />
   <meta name="author" content="LegacyRefactor.ai" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- SOCIAL SHARE -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="LegacyRefactor.ai – Modern Website Audits & Redesigns" />
-  <meta property="og:description" content="Instant, automated audits and redesigns that modernize your online presence." />
+  <meta property="og:title" content="LegacyRefactor.ai – Modern Websites & Legacy Code Upgrades" />
+  <meta property="og:description" content="Modern website redesigns and legacy code modernization services in one place." />
   <meta property="og:url" content="https://r-ai-999.github.io/" />
   <meta property="og:image" content="https://r-ai-999.github.io/favicon.png" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="LegacyRefactor.ai – Modern Website Audits & Redesigns" />
-  <meta name="twitter:description" content="Automated redesigns and audits for modern businesses." />
+  <meta name="twitter:title" content="LegacyRefactor.ai – Modern Websites & Legacy Code Upgrades" />
+  <meta name="twitter:description" content="Fast, clean upgrades for your website and legacy systems." />
   <meta name="twitter:image" content="https://r-ai-999.github.io/favicon.png" />
 
   <!-- ICONS -->
@@ -33,6 +33,18 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
   <style>
+    :root {
+      --mint: #00c776;
+      --mint-dark: #00a45f;
+      --bg-dark: #0d0d0d;
+      --card-dark: #1a1a1a;
+      --text-light: #f5f5f5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background-color: #ffffff;
@@ -48,7 +60,7 @@
     }
 
     h1 {
-      color: #29b36a;
+      color: var(--mint);
       font-size: 40px;
       margin: 0 0 10px;
     }
@@ -75,11 +87,119 @@
       max-width: 800px;
     }
 
+    /* Catalog sections */
+    .catalog {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      padding: 60px 20px 70px;
+    }
+
+    .catalog-title {
+      font-size: 2.1em;
+      margin: 40px 0 20px;
+      color: var(--mint);
+    }
+
+    .catalog-title:first-of-type {
+      margin-top: 10px;
+    }
+
+    .catalog-subtitle {
+      font-size: 14px;
+      color: #bbbbbb;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 10px;
+    }
+
+    .plan {
+      background: var(--card-dark);
+      border-radius: 12px;
+      width: 280px;
+      padding: 24px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.06);
+      text-align: left;
+    }
+
+    .plan:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      border-color: var(--mint);
+    }
+
+    .plan h3 {
+      color: var(--mint);
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .plan p {
+      max-width: 100%;
+      margin-bottom: 16px;
+      font-size: 14px;
+      color: #dddddd;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 18px;
+      color: #ffffff;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: var(--mint);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+      text-align: center;
+    }
+
+    .button:hover {
+      background-color: var(--mint-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .button:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
     footer {
       font-size: 12px;
       color: #888;
       padding: 20px;
-      margin-top: 40px;
+      margin-top: 0;
+      background: #fafafa;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 32px;
+      }
+      .catalog-title {
+        font-size: 1.8em;
+      }
+      .plan {
+        width: 100%;
+        max-width: 340px;
+      }
     }
   </style>
 </head>
@@ -88,99 +208,111 @@
 
   <header>
     <h1>LegacyRefactor.ai</h1>
-    <p>Modern website audits, redesigns, and automated social-to-site transformations.</p>
+    <p>Modern websites and legacy code upgrades — clean, fast, and done for you.</p>
   </header>
 
   <section>
     <h2>What We Do</h2>
-    <p>We modernize outdated business websites using AI-assisted tools and clean, contemporary design — fast, affordable, and beautifully tailored to your brand.</p>
+    <p>
+      We modernize outdated business websites and legacy codebases using AI-assisted tooling and clean, contemporary design.
+      Whether your site looks stuck in 2012 or your backend is full of tech debt, we help you upgrade without losing your brand or breaking everything.
+    </p>
   </section>
 
- <!-- =========================== -->
-<!--      PRODUCT CATALOG       -->
-<!-- =========================== -->
-<section style="text-align:center; padding:60px 20px; background:#0d0d0d; color:white;">
-  <h2 style="font-size:2.2em; margin-bottom:40px; color:#28a763;">Choose Your Plan</h2>
+  <!-- =========================== -->
+  <!--      PRODUCT CATALOG       -->
+  <!-- =========================== -->
+  <section class="catalog">
+    <p class="catalog-subtitle">
+      Pick the option that best matches where you are right now. Every engagement includes a short onboarding call so we can align on your goals.
+    </p>
 
-  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; max-width:1100px; margin:0 auto;">
+    <!-- WEBSITE SECTION -->
+    <h2 class="catalog-title">Website</h2>
 
-    <!-- Website Audit -->
-    <div style="background:#1a1a1a; border-radius:12px; padding:30px; width:300px; box-shadow:0 3px 12px rgba(0,0,0,0.3);">
-      <h3 style="color:#28a763;">Modern Website Audit</h3>
-      <p>A detailed audit of design, UX, mobile performance, SEO, and visual consistency.</p>
-      <h4 style="margin:15px 0; font-size:20px; color:#eee;">$99.99</h4>
-      <a href="https://buy.stripe.com/5kQaEWadQ00k6ul5RK3cc04"
-         target="_blank" rel="noopener"
-         style="display:inline-block; background:#28a763; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">
-        Start Audit
-      </a>
+    <div class="plans">
+      <!-- Modern Website Audit -->
+      <div class="plan">
+        <h3>Modern Website Audit</h3>
+        <p>A detailed audit of your current website: design, UX, mobile performance, loading speed, and brand consistency — in one clear report.</p>
+        <div class="price">$99.99</div>
+        <a class="button"
+           href="https://buy.stripe.com/5kQaEWadQ00k6ul5RK3cc04"
+           target="_blank" rel="noopener">
+          Start Audit
+        </a>
+      </div>
+
+      <!-- Full Website Redesign -->
+      <div class="plan">
+        <h3>Full Website Redesign</h3>
+        <p>A complete visual and structural refresh of your site using modern, conversion-aware layouts while staying true to your brand.</p>
+        <div class="price">$499.99</div>
+        <a class="button"
+           href="https://buy.stripe.com/dRmfZg71EbJ29Gx7ZS3cc05"
+           target="_blank" rel="noopener">
+          Start Redesign
+        </a>
+      </div>
+
+      <!-- Social → Website Package -->
+      <div class="plan">
+        <h3>Social → Website Package</h3>
+        <p>We turn your existing social content (posts, images, short videos) into a full website that matches how people already see your brand online.</p>
+        <div class="price">$999.99</div>
+        <a class="button"
+           href="https://buy.stripe.com/7sYeVcgCe5kE2e5dkc3cc06"
+           target="_blank" rel="noopener">
+          Build My Site
+        </a>
+      </div>
     </div>
 
-    <!-- Full Website Redesign -->
-    <div style="background:#1a1a1a; border-radius:12px; padding:30px; width:300px; box-shadow:0 3px 12px rgba(0,0,0,0.3);">
-      <h3 style="color:#28a763;">Full Website Redesign</h3>
-      <p>A complete rebuild of your site — modern look, performance upgrades, and branding polish.</p>
-      <h4 style="margin:15px 0; font-size:20px; color:#eee;">$499.99</h4>
-      <a href="https://buy.stripe.com/dRmfZg71EbJ29Gx7ZS3cc05"
-         target="_blank" rel="noopener"
-         style="display:inline-block; background:#28a763; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">
-        Start Redesign
-      </a>
+    <!-- CODE SECTION -->
+    <h2 class="catalog-title">Code</h2>
+
+    <div class="plans">
+      <!-- Codebase Assessment -->
+      <div class="plan">
+        <h3>Codebase Assessment</h3>
+        <p>A technical review of your repository with a straightforward report on risks, tech debt, and the biggest modernization wins.</p>
+        <div class="price">$99.99</div>
+        <a class="button"
+           href="https://buy.stripe.com/00w4gy5XA3cw6ul5RK3cc03"
+           target="_blank" rel="noopener">
+          Start Assessment
+        </a>
+      </div>
+
+      <!-- Refactor Sprint -->
+      <div class="plan">
+        <h3>Refactor Sprint</h3>
+        <p>A focused one-week sprint to stabilize and modernize your core modules — cleaner structure, fewer surprises, easier to extend.</p>
+        <div class="price">$499.99</div>
+        <a class="button"
+           href="https://buy.stripe.com/9B600i71E7sMaKBfsk3cc02"
+           target="_blank" rel="noopener">
+          Start Sprint
+        </a>
+      </div>
+
+      <!-- Managed Modernization -->
+      <div class="plan">
+        <h3>Managed Modernization</h3>
+        <p>Ongoing modernization: refactors, dependency updates, and improvements shipped regularly so your stack doesn’t fall behind again.</p>
+        <div class="price">$999.99</div>
+        <a class="button"
+           href="https://buy.stripe.com/8x2aEW71E28scSJa803cc01"
+           target="_blank" rel="noopener">
+          Get Started
+        </a>
+      </div>
     </div>
 
-    <!-- Social-to-Site Conversion -->
-    <div style="background:#1a1a1a; border-radius:12px; padding:30px; width:300px; box-shadow:0 3px 12px rgba(0,0,0,0.3);">
-      <h3 style="color:#28a763;">Social → Website Package</h3>
-      <p>We convert your social content into a complete, branded website—fast.</p>
-      <h4 style="margin:15px 0; font-size:20px; color:#eee;">$999.99</h4>
-      <a href="https://buy.stripe.com/7sYeVcgCe5kE2e5dkc3cc06"
-         target="_blank" rel="noopener"
-         style="display:inline-block; background:#28a763; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">
-        Build My Site
-      </a>
-    </div>
-
-    <!-- Codebase Assessment -->
-    <div style="background:#1a1a1a; border-radius:12px; padding:30px; width:300px; box-shadow:0 3px 12px rgba(0,0,0,0.3);">
-      <h3 style="color:#28a763;">Codebase Assessment</h3>
-      <p>Complete technical report identifying risks, opportunities, and modernization priorities.</p>
-      <h4 style="margin:15px 0; font-size:20px; color:#eee;">$99.99</h4>
-      <a href="https://buy.stripe.com/00w4gy5XA3cw6ul5RK3cc03"
-         target="_blank" rel="noopener"
-         style="display:inline-block; background:#28a763; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">
-        Start Assessment
-      </a>
-    </div>
-
-    <!-- Refactor Sprint -->
-    <div style="background:#1a1a1a; border-radius:12px; padding:30px; width:300px; box-shadow:0 3px 12px rgba(0,0,0,0.3);">
-      <h3 style="color:#28a763;">Refactor Sprint</h3>
-      <p>We stabilize & modernize your core modules in under a week.</p>
-      <h4 style="margin:15px 0; font-size:20px; color:#eee;">$499.99</h4>
-      <a href="https://buy.stripe.com/9B600i71E7sMaKBfsk3cc02"
-         target="_blank" rel="noopener"
-         style="display:inline-block; background:#28a763; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">
-        Start Sprint
-      </a>
-    </div>
-
-    <!-- Managed Modernization -->
-    <div style="background:#1a1a1a; border-radius:12px; padding:30px; width:300px; box-shadow:0 3px 12px rgba(0,0,0,0.3);">
-      <h3 style="color:#28a763;">Managed Modernization</h3>
-      <p>Ongoing modernization done for you—monitoring, refactoring, updates, and upgrades.</p>
-      <h4 style="margin:15px 0; font-size:20px; color:#eee;">$999.99</h4>
-      <a href="https://buy.stripe.com/8x2aEW71E28scSJa803cc01"
-         target="_blank" rel="noopener"
-         style="display:inline-block; background:#28a763; color:#fff; padding:10px 18px; border-radius:8px; text-decoration:none; font-weight:bold;">
-        Get Started
-      </a>
-    </div>
-
-  </div>
-</section>
+  </section>
 
   <footer>
-    Payments handled securely by Stripe. We will contact you at your checkout email with next steps.
+    Payments handled securely by Stripe. After checkout, you’ll receive an onboarding email at the address you used during payment.
   </footer>
 
 </body>

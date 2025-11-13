@@ -1,106 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Thank You – LegacyRefactor.ai</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f8f6;
-      color: #222;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
-
-    h1 {
-      color: #2ecc71;
-      margin-bottom: 20px;
-      font-size: 36px;
-    }
-
-    p {
-      font-size: 18px;
-      max-width: 600px;
-      margin-bottom: 30px;
-      line-height: 1.5;
-    }
-
-    a.button {
-      background-color: #2ecc71;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
-    }
-
-    a.button:hover {
-      background-color: #27ae60;
-    }
-  </style>
-</head>
-<body>
-  <h1>🎉 Thank You!</h1>
-  <p>
-    Your payment was successful. You’ll receive an onboarding email within the next 24 hours
-    from <strong>LegacyRefactor.ai</strong> with next steps.
-  </p>
-  <a class="button" href="https://r-ai-999.github.io">Return to Homepage</a>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
   <meta charset="UTF-8" />
+  <title>Thank You – LegacyRefactor.ai</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thank You — LegacyRefactor.ai</title>
+  <meta name="description" content="Thank you for your purchase from LegacyRefactor.ai." />
   <style>
+    :root {
+      --mint: #00c776;
+      --mint-dark: #00a45f;
+      --bg: #0d0d0d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      background: #f9fafb;
+      background: radial-gradient(circle at top, #1b1b1b, #050505);
+      color: #f5f5f5;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
-      color: #222;
+      min-height: 100vh;
     }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.3em;
-    }
-    p {
-      font-size: 1.2em;
-      margin-bottom: 1.5em;
+
+    .card {
+      background: rgba(10, 10, 10, 0.95);
+      border-radius: 16px;
+      padding: 32px 26px;
+      max-width: 420px;
+      width: 90%;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
       text-align: center;
-      max-width: 500px;
-      line-height: 1.5;
+      border: 1px solid rgba(255, 255, 255, 0.05);
     }
-    a {
-      text-decoration: none;
-      background: #2563eb;
-      color: #fff;
-      padding: 0.8em 1.6em;
-      border-radius: 8px;
+
+    .logo {
+      font-weight: bold;
+      color: var(--mint);
+      font-size: 20px;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    h1 {
+      margin: 10px 0 12px;
+      font-size: 26px;
+    }
+
+    p {
+      margin: 6px 0;
+      font-size: 14px;
+      color: #d0d0d0;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: var(--mint);
       font-weight: 600;
     }
-    a:hover {
-      background: #1d4ed8;
+
+    .note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #9a9a9a;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 22px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      background: var(--mint);
+      color: #040404;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .button:hover {
+      background: var(--mint-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .button:active {
+      transform: translateY(0);
+      box-shadow: none;
     }
   </style>
 </head>
 <body>
-  <h1>✅ Thank You for Your Purchase!</h1>
-  <p>Your payment has been received. Our AI team will start analyzing your codebase right away.</p>
-  <p>If you have any questions, contact <a href="mailto:legacyrefactorai@gmail.com">legacyrefactorai@gmail.com</a></p>
-  <a href="https://r-ai-999.github.io/">Back to Home</a>
+  <div class="card">
+    <div class="logo">LegacyRefactor.ai</div>
+    <h1>Thank You for Your Order</h1>
+    <p>
+      Your purchase was received successfully.
+    </p>
+    <p>
+      We’ll review your order and send a short onboarding email to the
+      <span class="highlight">email you used at checkout</span>.
+    </p>
+    <p>
+      If you don’t see anything within a few minutes, please check your spam folder
+      or search your inbox for “LegacyRefactor.ai”.
+    </p>
+
+    <p class="note">
+      Questions? You can reply directly to your onboarding email and we’ll follow up from there.
+    </p>
+
+    <a class="button" href="index.html">Back to Home</a>
+  </div>
 </body>
 </html>
-
