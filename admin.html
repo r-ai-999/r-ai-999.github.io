@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LegacyRefactor.ai – Owner Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Private owner dashboard for LegacyRefactor.ai." />
+
+  <style>
+    :root {
+      --mint: #00c776;
+      --mint-dark: #00a45f;
+      --bg-dark: #050505;
+      --card-dark: #141414;
+      --text-light: #f5f5f5;
+      --text-muted: #a0a0a0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #181818, #000000);
+      color: var(--text-light);
+    }
+
+    .shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 24px 30px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 22px;
+      letter-spacing: 0.04em;
+      color: var(--mint);
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    main {
+      padding: 26px 30px 40px;
+      max-width: 980px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: 1fr;
+        padding: 20px 16px 32px;
+      }
+    }
+
+    .card {
+      background: var(--card-dark);
+      border-radius: 14px;
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .card h2 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .card p {
+      margin: 0 0 14px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #3ddc84;
+      box-shadow: 0 0 4px #3ddc84;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin: 12px 0 6px;
+    }
+
+    .link-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: 8px;
+    }
+
+    .link-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 8px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.25);
+    }
+
+    .link-row span {
+      font-size: 13px;
+    }
+
+    .link-row small {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .btn,
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border-radius: 8px;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    .btn {
+      background: var(--mint);
+      color: #020202;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    }
+
+    .btn:hover {
+      background: var(--mint-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 7px 20px rgba(0,0,0,0.55);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    .btn-ghost {
+      background: rgba(0,0,0,0.3);
+      color: var(--text-light);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.04);
+    }
+
+    ol.checklist {
+      margin: 8px 0 0;
+      padding-left: 18px;
+      font-size: 13px;
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    ol.checklist li + li {
+      margin-top: 4px;
+    }
+
+    code {
+      font-family: Menlo, Monaco, monospace;
+      font-size: 11px;
+      background: rgba(0,0,0,0.6);
+      padding: 2px 4px;
+      border-radius: 4px;
+      color: #e6e6e6;
+    }
+
+    footer {
+      padding: 8px 20px 16px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div>
+        <div class="logo">LegacyRefactor.ai</div>
+        <div class="tagline">Owner dashboard – internal use only</div>
+      </div>
+      <a href="index.html" class="btn-ghost">View Live Site</a>
+    </header>
+
+    <main>
+      <!-- Left column: quick links and products -->
+      <section class="card">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>Live products</span>
+        </div>
+        <h2>Store Overview</h2>
+        <p>Six offers are live: three website solutions and three code solutions. All payments go through Stripe and start with a short onboarding email from you.</p>
+
+        <div class="section-title">Website solutions</div>
+        <div class="link-group">
+
+          <div class="link-row">
+            <div>
+              <span>Modern Website Audit – $99.99</span><br />
+              <small>Quick audit report of design, UX, speed, and consistency.</small>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/5kQaEWadQ00k6ul5RK3cc04" target="_blank" rel="noopener">Link</a>
+          </div>
+
+          <div class="link-row">
+            <div>
+              <span>Full Website Redesign – $499.99</span><br />
+              <small>Complete refresh using modern layouts and branding.</small>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/dRmfZg71EbJ29Gx7ZS3cc05" target="_blank" rel="noopener">Link</a>
+          </div>
+
+          <div class="link-row">
+            <div>
+              <span>Social to Website Package – $999.99</span><br />
+              <small>Turn existing social content into a full site.</small>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/7sYeVcgCe5kE2e5dkc3cc06" target="_blank" rel="noopener">Link</a>
+          </div>
+        </div>
+
+        <div class="section-title">Code solutions</div>
+        <div class="link-group">
+
+          <div class="link-row">
+            <div>
+              <span>Codebase Assessment – $99.99</span><br />
+              <small>Risk and tech debt report for an existing repository.</small>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/00w4gy5XA3cw6ul5RK3cc03" target="_blank" rel="noopener">Link</a>
+          </div>
+
+          <div class="link-row">
+            <div>
+              <span>Refactor Sprint – $499.99</span><br />
+              <small>Short, focused modernization sprint on core modules.</small>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/9B600i71E7sMaKBfsk3cc02" target="_blank" rel="noopener">Link</a>
+          </div>
+
+          <div class="link-row">
+            <div>
+              <span>Managed Modernization – $999.99</span><br />
+              <small>Ongoing updates, refactors, and dependency upgrades.</small>
+            </div>
+            <a class="btn" href="https://buy.stripe.com/8x2aEW71E28scSJa803cc01" target="_blank" rel="noopener">Link</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right column: radar + outreach workflow -->
+      <section class="card">
+        <div class="pill">
+          <span class="pill-dot"></span>
+          <span>Radar and outreach workflow</span>
+        </div>
+        <h2>Lead Flow Checklist</h2>
+        <p>Use this flow on your Mac to move from cold websites to booked work using the radar and pitch generator.</p>
+
+        <div class="section-title">Step 1 – Run the website radar</div>
+        <ol class="checklist">
+          <li>Open Terminal.</li>
+          <li><code>cd ~/opportunity-radar</code></li>
+          <li>Update <code>inputs/websites.csv</code> with new websites you want to check.</li>
+          <li>Run <code>python3 website_radar/website_radar.py</code></li>
+          <li>This creates a new CSV and JSON in <code>outputs/</code> with scores for each site.</li>
+        </ol>
+
+        <div class="section-title">Step 2 – Generate outreach pitches</div>
+        <ol class="checklist">
+          <li>In the same folder, run:<br />
+            <code>python3 website_radar/generate_website_pitch.py</code>
+          </li>
+          <li>It prints the path to a <code>pitches_YYYY-MM-DD-XXXX.txt</code> file in <code>outputs/pitches/</code>.</li>
+          <li>Open it in TextEdit:<br />
+            <code>open -a TextEdit outputs/pitches/pitches_...</code>
+          </li>
+          <li>Each lead has a short summary and an email you can paste into Gmail.</li>
+        </ol>
+
+        <div class="section-title">Step 3 – Send outreach</div>
+        <ol class="checklist">
+          <li>Copy the email for a lead from the pitches file.</li>
+          <li>Paste into Gmail and edit anything you want to sound more like you.</li>
+          <li>Send 5 to 10 good emails rather than a huge blast.</li>
+        </ol>
+
+        <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:8px;">
+          <a href="mailto:" class="btn-ghost">Open Email</a>
+          <a href="index.html" class="btn-ghost">View Public Landing Page</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      This page is meant for you only. Do not link it from the main site.
+    </footer>
+  </div>
+</body>
+</html>
