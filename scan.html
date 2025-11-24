@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Instant Website Scanner | LegacyRefactor.ai</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Instant website scan to evaluate mobile performance, SEO signals, SSL, and modern design readiness." />
+
+  <style>
+    :root {
+      --mint: #00c776;
+      --mint-dark: #00a45f;
+      --bg-dark: #0d0d0d;
+      --card-dark: #1a1a1a;
+      --light-text: #f4f4f4;
+      --mid-text: #cfcfcf;
+    }
+
+    body {
+      background: var(--bg-dark);
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: var(--light-text);
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 20px;
+    }
+
+    h1 {
+      color: var(--mint);
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0 auto;
+      max-width: 600px;
+      line-height: 1.55;
+      color: var(--mid-text);
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .scanner-box {
+      max-width: 520px;
+      margin: 40px auto 0;
+      display: flex;
+      gap: 12px;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px;
+      border-radius: 8px;
+      outline: none;
+      border: 1px solid #222;
+      background: #111;
+      color: var(--light-text);
+      font-size: 15px;
+    }
+
+    input:focus {
+      border-color: var(--mint);
+    }
+
+    button {
+      background: var(--mint);
+      border: none;
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background: var(--mint-dark);
+    }
+
+    .results {
+      max-width: 700px;
+      margin: 50px auto;
+      display: none;
+    }
+
+    .result-card {
+      background: var(--card-dark);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .result-card h3 {
+      color: var(--mint);
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .result-card p {
+      text-align: left;
+      max-width: none;
+    }
+
+    footer {
+      margin-top: 60px;
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Instant Website Scanner</h1>
+    <p>Paste any URL and instantly check SSL status, SEO basics, mobile-friendliness, and overall modern design signals. Lightweight and fast.</p>
+
+    <div class="scanner-box">
+      <input id="urlInput" type="text" placeholder="https://example.com" />
+      <button onclick="runScan()">Scan</button>
+    </div>
+  </header>
+
+  <div id="results" class="results"></div>
+
+  <footer>Website Scanner © LegacyRefactor.ai</footer>
+
+  <script>
+    async function runScan() {
+      const url = document.getElementById("urlInput").value.trim();
+      const results = document.getElementById("results");
+
+      if (!url) {
+        alert("Please enter a valid URL.");
+        return;
+      }
+
+      results.style.display = "block";
+      results.innerHTML = `
+        <div class="result-card"><h3>Scanning…</h3><p>Please wait 1–2 seconds.</p></div>
+      `;
+
+      try {
+        const httpsCheck = url.startsWith("https://");
+
+        let response, html = "";
+        try {
+          response = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`);
+          html = await response.text();
+        } catch (err) {
+          html = "";
+        }
+
+        const titleMatch = html.match(/<title>(.*?)<\/title>/i);
+        const hasMetaDescription = /<meta[^>]*name=["']description["']/i.test(html);
+        const hasViewport = /<meta[^>]*name=["']viewport["']/i.test(html);
+
+        results.innerHTML = `
+          <div class="result-card">
+            <h3>SSL Check</h3>
+            <p>${httpsCheck ? "✔ Secure (HTTPS)" : "❌ Not secure (missing HTTPS)"}</p>
+          </div>
+
+          <div class="result-card">
+            <h3>Title Tag</h3>
+            <p>${titleMatch ? "✔ Found: " + titleMatch[1] : "❌ Missing title tag"}</p>
+          </div>
+
+          <div class="result-card">
+            <h3>Meta Description</h3>
+            <p>${hasMetaDescription ? "✔ Found meta description" : "❌ Missing meta description"}</p>
+          </div>
+
+          <div class="result-card">
+            <h3>Mobile Friendly</h3>
+            <p>${hasViewport ? "✔ Has viewport tag" : "❌ No responsive viewport tag detected"}</p>
+          </div>
+
+          <div class="result-card">
+            <h3>Design Heuristic</h3>
+            <p>${html.length < 2000 ? 
+              "⚠ Likely older or minimal design" : 
+              "✔ Looks like a modern multi-section layout"
+            }</p>
+          </div>
+        `;
+      } catch (err) {
+        results.innerHTML = `
+          <div class="result-card">
+            <h3>Error</h3>
+            <p>Could not scan this site. It may block public scanning or be offline.</p>
+          </div>
+        `;
+      }
+    }
+  </script>
+
+</body>
+</html>
