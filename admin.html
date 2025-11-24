@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>LegacyRefactor.ai – Owner Dashboard</title>
+  <title>LegacyRefactor.ai – Admin Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Private owner dashboard for LegacyRefactor.ai." />
 
   <style>
     :root {
       --mint: #00c776;
       --mint-dark: #00a45f;
-      --bg-dark: #050505;
-      --card-dark: #141414;
-      --text-light: #f5f5f5;
-      --text-muted: #a0a0a0;
+      --bg-dark: #0d0d0d;
+      --card-dark: #151515;
+      --border-subtle: #262626;
+      --text-light: #f4f4f4;
+      --text-muted: #aaaaaa;
     }
 
     * {
@@ -24,325 +24,277 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #181818, #000000);
+      background: #050505;
       color: var(--text-light);
     }
 
-    .shell {
-      min-height: 100vh;
+    /* Top bar */
+    .top-bar {
+      width: 100%;
+      padding: 28px 20px;
+      background: linear-gradient(90deg, var(--mint), var(--mint-dark), #0d8c56);
+      color: white;
+    }
+
+    .top-inner {
+      max-width: 1100px;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
+      gap: 6px;
     }
 
-    header {
-      padding: 24px 30px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .logo {
+    .top-title {
+      font-size: 26px;
       font-weight: bold;
-      font-size: 22px;
-      letter-spacing: 0.04em;
-      color: var(--mint);
+      letter-spacing: 0.5px;
     }
 
-    .tagline {
-      font-size: 13px;
-      color: var(--text-muted);
+    .top-subtitle {
+      font-size: 14px;
+      opacity: 0.9;
     }
 
-    main {
-      padding: 26px 30px 40px;
-      max-width: 980px;
-      width: 100%;
-      margin: 0 auto;
+    .tag {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.25);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* Main layout */
+    .main {
+      max-width: 1100px;
+      margin: 30px auto 60px;
+      padding: 0 20px 40px;
+    }
+
+    .grid {
       display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 900px) {
-      main {
-        grid-template-columns: 1fr;
-        padding: 20px 16px 32px;
-      }
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
     }
 
     .card {
       background: var(--card-dark);
       border-radius: 14px;
-      padding: 18px 18px 20px;
-      border: 1px solid rgba(255,255,255,0.06);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      padding: 20px 18px 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 5px 18px rgba(0,0,0,0.35);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .card h2 {
-      margin: 0 0 6px;
       font-size: 18px;
+      margin: 0;
+      color: var(--mint);
     }
 
     .card p {
-      margin: 0 0 14px;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-muted);
       line-height: 1.5;
+      margin: 0;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #777;
+      margin-bottom: 4px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
     }
 
     .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
       font-size: 11px;
-      padding: 4px 9px;
+      padding: 3px 9px;
       border-radius: 999px;
-      background: rgba(0,0,0,0.45);
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--text-muted);
-      margin-bottom: 6px;
+      border: 1px solid #333;
+      color: #ccc;
+      background: #111;
     }
 
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #3ddc84;
-      box-shadow: 0 0 4px #3ddc84;
-    }
-
-    .section-title {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin: 12px 0 6px;
-    }
-
-    .link-group {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
+    .code-block {
       margin-top: 8px;
-    }
-
-    .link-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      padding: 7px 8px;
+      background: #050505;
       border-radius: 8px;
-      background: rgba(0,0,0,0.25);
-    }
-
-    .link-row span {
-      font-size: 13px;
-    }
-
-    .link-row small {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .btn,
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      border-radius: 8px;
-      padding: 7px 11px;
+      padding: 10px 10px 10px;
+      border: 1px solid #333;
       font-size: 12px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.1s ease;
+      font-family: Menlo, Monaco, Consolas, monospace;
+      color: #ddd;
+      line-height: 1.4;
+      overflow-x: auto;
     }
 
-    .btn {
-      background: var(--mint);
-      color: #020202;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-    }
-
-    .btn:hover {
-      background: var(--mint-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 7px 20px rgba(0,0,0,0.55);
-    }
-
-    .btn:active {
-      transform: translateY(0);
-      box-shadow: none;
-    }
-
-    .btn-ghost {
-      background: rgba(0,0,0,0.3);
-      color: var(--text-light);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(255,255,255,0.04);
-    }
-
-    ol.checklist {
-      margin: 8px 0 0;
-      padding-left: 18px;
-      font-size: 13px;
-      color: var(--text-light);
-      line-height: 1.6;
-    }
-
-    ol.checklist li + li {
+    .small-label {
+      font-size: 11px;
+      color: #777;
+      text-transform: uppercase;
+      letter-spacing: 1px;
       margin-top: 4px;
+      margin-bottom: 2px;
     }
 
-    code {
-      font-family: Menlo, Monaco, monospace;
-      font-size: 11px;
-      background: rgba(0,0,0,0.6);
-      padding: 2px 4px;
-      border-radius: 4px;
-      color: #e6e6e6;
+    .list {
+      padding-left: 16px;
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: #c5c5c5;
     }
 
-    footer {
-      padding: 8px 20px 16px;
-      text-align: center;
+    .list li {
+      margin-bottom: 4px;
+    }
+
+    .footer-note {
+      margin-top: 24px;
       font-size: 11px;
-      color: var(--text-muted);
+      color: #666;
+      text-align: left;
+    }
+
+    @media (max-width: 960px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="shell">
-    <header>
-      <div>
-        <div class="logo">LegacyRefactor.ai</div>
-        <div class="tagline">Owner dashboard – internal use only</div>
+
+  <div class="top-bar">
+    <div class="top-inner">
+      <div class="top-title">LegacyRefactor.ai Admin</div>
+      <div class="top-subtitle">
+        Private tools for radar, outreach, and exports. This page is not linked anywhere public.
       </div>
-      <a href="index.html" class="btn-ghost">View Live Site</a>
-    </header>
-
-    <main>
-      <!-- Left column: quick links and products -->
-      <section class="card">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          <span>Live products</span>
-        </div>
-        <h2>Store Overview</h2>
-        <p>Six offers are live: three website solutions and three code solutions. All payments go through Stripe and start with a short onboarding email from you.</p>
-
-        <div class="section-title">Website solutions</div>
-        <div class="link-group">
-
-          <div class="link-row">
-            <div>
-              <span>Modern Website Audit – $99.99</span><br />
-              <small>Quick audit report of design, UX, speed, and consistency.</small>
-            </div>
-            <a class="btn" href="https://buy.stripe.com/5kQaEWadQ00k6ul5RK3cc04" target="_blank" rel="noopener">Link</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <span>Full Website Redesign – $499.99</span><br />
-              <small>Complete refresh using modern layouts and branding.</small>
-            </div>
-            <a class="btn" href="https://buy.stripe.com/dRmfZg71EbJ29Gx7ZS3cc05" target="_blank" rel="noopener">Link</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <span>Social to Website Package – $999.99</span><br />
-              <small>Turn existing social content into a full site.</small>
-            </div>
-            <a class="btn" href="https://buy.stripe.com/7sYeVcgCe5kE2e5dkc3cc06" target="_blank" rel="noopener">Link</a>
-          </div>
-        </div>
-
-        <div class="section-title">Code solutions</div>
-        <div class="link-group">
-
-          <div class="link-row">
-            <div>
-              <span>Codebase Assessment – $99.99</span><br />
-              <small>Risk and tech debt report for an existing repository.</small>
-            </div>
-            <a class="btn" href="https://buy.stripe.com/00w4gy5XA3cw6ul5RK3cc03" target="_blank" rel="noopener">Link</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <span>Refactor Sprint – $499.99</span><br />
-              <small>Short, focused modernization sprint on core modules.</small>
-            </div>
-            <a class="btn" href="https://buy.stripe.com/9B600i71E7sMaKBfsk3cc02" target="_blank" rel="noopener">Link</a>
-          </div>
-
-          <div class="link-row">
-            <div>
-              <span>Managed Modernization – $999.99</span><br />
-              <small>Ongoing updates, refactors, and dependency upgrades.</small>
-            </div>
-            <a class="btn" href="https://buy.stripe.com/8x2aEW71E28scSJa803cc01" target="_blank" rel="noopener">Link</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- Right column: radar + outreach workflow -->
-      <section class="card">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          <span>Radar and outreach workflow</span>
-        </div>
-        <h2>Lead Flow Checklist</h2>
-        <p>Use this flow on your Mac to move from cold websites to booked work using the radar and pitch generator.</p>
-
-        <div class="section-title">Step 1 – Run the website radar</div>
-        <ol class="checklist">
-          <li>Open Terminal.</li>
-          <li><code>cd ~/opportunity-radar</code></li>
-          <li>Update <code>inputs/websites.csv</code> with new websites you want to check.</li>
-          <li>Run <code>python3 website_radar/website_radar.py</code></li>
-          <li>This creates a new CSV and JSON in <code>outputs/</code> with scores for each site.</li>
-        </ol>
-
-        <div class="section-title">Step 2 – Generate outreach pitches</div>
-        <ol class="checklist">
-          <li>In the same folder, run:<br />
-            <code>python3 website_radar/generate_website_pitch.py</code>
-          </li>
-          <li>It prints the path to a <code>pitches_YYYY-MM-DD-XXXX.txt</code> file in <code>outputs/pitches/</code>.</li>
-          <li>Open it in TextEdit:<br />
-            <code>open -a TextEdit outputs/pitches/pitches_...</code>
-          </li>
-          <li>Each lead has a short summary and an email you can paste into Gmail.</li>
-        </ol>
-
-        <div class="section-title">Step 3 – Send outreach</div>
-        <ol class="checklist">
-          <li>Copy the email for a lead from the pitches file.</li>
-          <li>Paste into Gmail and edit anything you want to sound more like you.</li>
-          <li>Send 5 to 10 good emails rather than a huge blast.</li>
-        </ol>
-
-        <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:8px;">
-          <a href="mailto:" class="btn-ghost">Open Email</a>
-          <a href="index.html" class="btn-ghost">View Public Landing Page</a>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      This page is meant for you only. Do not link it from the main site.
-    </footer>
+      <span class="tag">Internal · For your eyes only</span>
+    </div>
   </div>
+
+  <div class="main">
+
+    <div class="grid">
+
+      <!-- WEBSITE RADAR -->
+      <div class="card">
+        <div class="section-label">Module</div>
+        <h2>Website Radar</h2>
+        <p>
+          Scan candidate business websites and score how “upgradeable” they are for LegacyRefactor.ai
+          services.
+        </p>
+
+        <div class="small-label">Run scanner</div>
+        <div class="code-block">
+cd ~/opportunity-radar
+python3 website_radar/website_radar.py
+        </div>
+
+        <div class="small-label">Inputs</div>
+        <ul class="list">
+          <li><code>inputs/websites.csv</code> – business name + URL list</li>
+        </ul>
+
+        <div class="small-label">Outputs</div>
+        <ul class="list">
+          <li><code>outputs/website_leads_YYYY-MM-DD.csv</code></li>
+          <li><code>outputs/website_leads_YYYY-MM-DD.json</code></li>
+        </ul>
+
+        <div class="pill-row">
+          <span class="pill">Lead scoring</span>
+          <span class="pill">Design age</span>
+          <span class="pill">Mobile / SEO / structure</span>
+        </div>
+      </div>
+
+      <!-- OUTREACH GENERATOR (MULTI-FORMAT) -->
+      <div class="card">
+        <div class="section-label">Module</div>
+        <h2>Outreach Generator</h2>
+        <p>
+          Turn scored leads into ready-to-send outreach in three formats:
+          cold email, short DM, and a quick audit blurb.
+        </p>
+
+        <div class="small-label">Generate outreach bundle</div>
+        <div class="code-block">
+cd ~/opportunity-radar
+python3 website_radar/generate_website_pitch.py
+        </div>
+
+        <div class="small-label">Uses</div>
+        <ul class="list">
+          <li>Top rows from <code>outputs/website_leads_*.csv</code></li>
+        </ul>
+
+        <div class="small-label">Creates</div>
+        <ul class="list">
+          <li><code>outputs/pitches/pitches_YYYY-MM-DD-HHMM.txt</code></li>
+        </ul>
+
+        <div class="small-label">Each lead includes</div>
+        <ul class="list">
+          <li><strong>Cold Email</strong> – longer, more context</li>
+          <li><strong>Short DM</strong> – quick, social-style pitch</li>
+          <li><strong>Audit Bullets</strong> – copy-paste notes or tweet-length summary</li>
+        </ul>
+
+        <p class="footer-note">
+          Workflow: run radar → run outreach generator → copy the format you need into Gmail, DMs, or your
+          outreach system.
+        </p>
+      </div>
+
+      <!-- FILES & OUTPUTS OVERVIEW -->
+      <div class="card">
+        <div class="section-label">Reference</div>
+        <h2>Files & Outputs</h2>
+        <p>
+          Quick map of where everything lives so you never have to remember paths.
+        </p>
+
+        <div class="small-label">Core project</div>
+        <ul class="list">
+          <li><code>~/opportunity-radar/</code></li>
+        </ul>
+
+        <div class="small-label">Important folders</div>
+        <ul class="list">
+          <li><code>inputs/</code> – CSVs of candidate websites</li>
+          <li><code>outputs/</code> – scored leads + outreach text files</li>
+          <li><code>website_radar/</code> – Python logic (scanner + pitches)</li>
+        </ul>
+
+        <div class="small-label">Where to look before outreach</div>
+        <ul class="list">
+          <li>Top scored leads → <code>outputs/website_leads_*.csv</code></li>
+          <li>Ready text to send → <code>outputs/pitches/pitches_*.txt</code></li>
+        </ul>
+
+        <p class="footer-note">
+          This card is just a mental map – if you ever forget how things connect, check here first.
+        </p>
+      </div>
+
+    </div>
+  </div>
+
 </body>
 </html>
