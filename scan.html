@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Instant Website Scanner – LegacyRefactor.ai</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<title>Instant Website Scanner — LegacyRefactor.ai</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
   :root {
@@ -11,140 +11,184 @@
     --mint-dark: #00a45f;
     --bg-dark: #0d0d0d;
     --card-dark: #1a1a1a;
+    --text-light: #e8e8e8;
   }
 
   body {
+    background: var(--bg-dark);
+    color: var(--text-light);
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f8f8f8;
-    font-family: Arial, sans-serif;
     text-align: center;
   }
 
-  header {
-    padding: 40px 20px;
-    background: #f1f7f2;
-  }
-
-  header h1 {
+  h1 {
+    font-size: 44px;
+    margin-top: 80px;
+    margin-bottom: 12px;
     color: var(--mint);
-    font-size: 36px;
-    margin-bottom: 10px;
+    font-weight: bold;
+    animation: fadeIn 1s ease-out;
   }
 
-  header p {
-    color: #555;
+  .subtitle {
     font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 50px;
+    color: #bbbbbb;
+    line-height: 1.5;
+    animation: fadeIn 1.4s ease-out;
   }
 
   .scanner-box {
-    background: white;
-    padding: 30px;
-    width: 90%;
-    max-width: 500px;
-    margin: 40px auto;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    animation: fadeIn 1.2s ease-out;
   }
 
-  input[type="text"] {
-    width: 90%;
-    max-width: 400px;
-    padding: 14px;
+  input {
+    width: 500px;
+    padding: 16px;
     border-radius: 8px;
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-    font-size: 16px;
+    border: 1px solid #333;
+    background: #111;
+    color: white;
+    font-size: 17px;
+    outline: none;
   }
 
   button {
+    padding: 16px 28px;
     background: var(--mint);
-    color: white;
     border: none;
-    padding: 14px 22px;
     border-radius: 8px;
-    font-size: 16px;
+    color: black;
+    font-weight: bold;
+    font-size: 17px;
     cursor: pointer;
-    transition: 0.2s;
+    transition: background 0.2s, transform 0.1s;
   }
 
   button:hover {
     background: var(--mint-dark);
+    transform: translateY(-2px);
   }
 
-  #loading {
-    display: none;
-    margin-top: 20px;
-    font-size: 16px;
-    color: #555;
+  button:active {
+    transform: translateY(0);
   }
 
-  #results-box {
-    display: none;
-    background: white;
-    padding: 25px;
-    width: 90%;
-    max-width: 600px;
-    margin: 30px auto;
+  /* RESULT CARD */
+  .results {
+    max-width: 850px;
+    margin: 0 auto;
+    background: var(--card-dark);
     border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    padding: 32px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
     text-align: left;
-    white-space: pre-wrap;
-    font-size: 15px;
-    line-height: 1.5;
+    display: none;
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  .results h2 {
+    color: var(--mint);
+    margin-top: 0;
+    font-size: 26px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  .ok { background: #0c7; color: #000; }
+  .warn { background: #f7b400; color: black; }
+  .bad { background: #ff4e4e; color: white; }
+
+  footer {
+    margin-top: 70px;
+    padding: 20px;
+    font-size: 14px;
+    color: #777;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 </style>
-
 </head>
 
 <body>
 
-<header>
-  <h1>Instant Website Scanner</h1>
-  <p>Paste any website URL below. Your analysis will appear instantly.</p>
-</header>
+<h1>Instant Website Scanner</h1>
 
-<div class="scanner-box">
-  <input id="urlInput" type="text" placeholder="https://example.com">
-  <br>
-  <button onclick="runScan()">Scan Website</button>
-  <div id="loading">Scanning website…</div>
+<div class="subtitle">
+  Paste any URL and instantly check SSL status, SEO basics, mobile-friendliness, metadata,
+  and overall modern design signals. Lightweight, instant, and completely free.
 </div>
 
-<div id="results-box"></div>
+<div class="scanner-box">
+  <input id="urlInput" placeholder="https://example.com" />
+  <button onclick="scanSite()">Scan</button>
+</div>
+
+<div id="results" class="results"></div>
+
+<footer>
+  Website Scanner © LegacyRefactor.ai
+</footer>
 
 <script>
-function runScan() {
+async function scanSite() {
   const url = document.getElementById("urlInput").value.trim();
-  const loading = document.getElementById("loading");
-  const resultsBox = document.getElementById("results-box");
+  if (!url) return alert("Enter a URL");
 
-  if (!url) {
-    alert("Please enter a URL first.");
-    return;
+  const r = document.getElementById("results");
+  r.style.display = "block";
+  r.innerHTML = "<p>Scanning...</p>";
+
+  try {
+    const api = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+    const response = await fetch(api);
+    const data = await response.json();
+
+    const html = data.contents || "";
+
+    const sslOK = url.startsWith("https://");
+    const titleOK = html.includes("<title>");
+    const mobileOK = html.includes("viewport");
+    const seoDescOK = html.includes("meta name=\"description\"");
+    const modernOK = html.includes("display:flex") || html.includes("flex;");
+
+    const badge = (ok) =>
+      ok ? "<span class='badge ok'>OK</span>" : "<span class='badge bad'>Missing</span>";
+
+    r.innerHTML = `
+      <h2>Scan Results for ${url}</h2>
+
+      <p><b>SSL:</b> ${badge(sslOK)}</p>
+      <p><b>SEO Description:</b> ${badge(seoDescOK)}</p>
+      <p><b>Mobile Responsive Tag:</b> ${badge(mobileOK)}</p>
+      <p><b>Page Title:</b> ${badge(titleOK)}</p>
+      <p><b>Modern Design Signals (flexbox/grid detected):</b> ${badge(modernOK)}</p>
+
+      <br><br>
+      <p style="color:#aaa;font-size:14px;">
+        These are lightweight indicators — for full audits, check out “Modern Website Audit.”
+      </p>
+    `;
+  } catch (e) {
+    r.innerHTML = "<p style='color:red;'>Could not scan site.</p>";
   }
-
-  // Show loading
-  loading.style.display = "block";
-  resultsBox.style.display = "none";
-
-  // Send to handler (placeholder — backend added in Phase 5)
-  fetch("scan-handler.php", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: "url=" + encodeURIComponent(url)
-  })
-  .then(res => res.text())
-  .then(text => {
-    loading.style.display = "none";
-    resultsBox.style.display = "block";
-    resultsBox.textContent = text;
-  })
-  .catch(err => {
-    loading.style.display = "none";
-    alert("Error connecting to scanner.");
-  });
 }
 </script>
 
