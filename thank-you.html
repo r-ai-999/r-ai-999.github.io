@@ -4,115 +4,168 @@
   <meta charset="UTF-8" />
   <title>Thank You – LegacyRefactor.ai</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Thank you for your purchase from LegacyRefactor.ai." />
+
   <style>
     :root {
       --mint: #00c776;
       --mint-dark: #00a45f;
-      --bg: #0d0d0d;
-    }
-
-    * {
-      box-sizing: border-box;
+      --bg-dark: #0d0d0d;
+      --text-light: #f4f4f4;
+      --card-dark: #1a1a1a;
     }
 
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #1b1b1b, #050505);
-      color: #f5f5f5;
+      background: #ffffff;
+      color: #222;
+    }
+
+    /* Top Gradient Bar */
+    .gradient-bar {
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(90deg, var(--mint), var(--mint-dark), #0d8c56);
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-    }
-
-    .card {
-      background: rgba(10, 10, 10, 0.95);
-      border-radius: 16px;
-      padding: 32px 26px;
-      max-width: 420px;
-      width: 90%;
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .logo {
+      color: white;
+      font-size: 32px;
       font-weight: bold;
-      color: var(--mint);
-      font-size: 20px;
-      letter-spacing: 0.04em;
-      margin-bottom: 8px;
+      letter-spacing: 0.5px;
     }
 
-    h1 {
-      margin: 8px 0 14px;
-      font-size: 26px;
+    /* Main Layout */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .content {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+      color: var(--mint-dark);
     }
 
     p {
-      margin: 6px 0;
-      font-size: 14px;
-      color: #d0d0d0;
-      line-height: 1.6;
+      font-size: 16px;
+      line-height: 1.55;
+      margin-bottom: 18px;
     }
 
-    .highlight {
+    /* NEXT STEPS card */
+    .next-steps {
+      background: var(--card-dark);
+      color: var(--text-light);
+      padding: 22px 26px;
+      width: 280px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    }
+
+    .next-steps h3 {
+      margin-top: 0;
+      font-size: 20px;
       color: var(--mint);
-      font-weight: 600;
     }
 
-    .note {
-      margin-top: 16px;
-      font-size: 12px;
-      color: #9a9a9a;
+    .next-steps ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
     }
 
+    .next-steps li {
+      margin-bottom: 12px;
+      padding-left: 16px;
+      position: relative;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .next-steps li::before {
+      content: "✓";
+      color: var(--mint);
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-weight: bold;
+    }
+
+    /* Button */
     .button {
       display: inline-block;
-      margin-top: 22px;
-      padding: 10px 22px;
+      background-color: var(--mint);
+      color: #fff;
+      padding: 12px 24px;
+      font-size: 16px;
       border-radius: 8px;
-      background: var(--mint);
-      color: #040404;
       font-weight: bold;
       text-decoration: none;
-      font-size: 14px;
-      transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+      margin-top: 20px;
+      transition: background-color 0.2s ease;
     }
 
     .button:hover {
-      background: var(--mint-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      background-color: var(--mint-dark);
     }
 
-    .button:active {
-      transform: translateY(0);
-      box-shadow: none;
+    /* Mobile Layout */
+    @media (max-width: 860px) {
+      .container {
+        flex-direction: column;
+        padding: 40px 20px;
+      }
+      .next-steps {
+        width: 100%;
+        max-width: 400px;
+        margin-top: 30px;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <div class="logo">LegacyRefactor.ai</div>
-    <h1>Thank You for Your Order</h1>
-    <p>Your purchase went through successfully.</p>
-    <p>
-      We’ll send a short onboarding email to the
-      <span class="highlight">email you used at checkout</span>.
-    </p>
-    <p>
-      If you don’t see it soon, check your spam folder or search your inbox for “LegacyRefactor.ai”.
-    </p>
 
-    <p class="note">
-      Have a question? Just reply to your onboarding email and we’ll get back to you.
-    </p>
-
-    <a class="button" href="index.html">Back to Home</a>
+  <div class="gradient-bar">
+    Thank You
   </div>
+
+  <div class="container">
+    <div class="content">
+      <h2>Your purchase is confirmed</h2>
+      <p>
+        Thank you for choosing LegacyRefactor.ai. Your order has been successfully received and is now being processed.
+      </p>
+
+      <p>
+        You will receive an onboarding email shortly. If you have any questions or want to add context before we begin, you can reply directly to that email.
+      </p>
+
+      <a href="index.html" class="button">Go Back Home</a>
+    </div>
+
+    <div class="next-steps">
+      <h3>Next Steps</h3>
+      <ul>
+        <li>Check your inbox for onboarding details</li>
+        <li>Fill out the short intake form</li>
+        <li>We begin your project within 24 hours</li>
+        <li>You’ll receive updates throughout the process</li>
+      </ul>
+    </div>
+  </div>
+
 </body>
 </html>
