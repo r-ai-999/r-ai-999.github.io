@@ -111,20 +111,21 @@
       margin-bottom: 4px;
     }
 
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+    .pill {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid #00c776;
+      color: #00c776;
+      background: transparent;
+      display: inline-block;
+      text-decoration: none;
       margin-top: 6px;
     }
 
-    .pill {
-      font-size: 11px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      border: 1px solid #333;
-      color: #ccc;
-      background: #111;
+    .pill:hover {
+      background: #00c776;
+      color: black;
     }
 
     .code-block {
@@ -196,8 +197,7 @@
         <div class="section-label">Module</div>
         <h2>Website Radar</h2>
         <p>
-          Scan candidate business websites and score how “upgradeable” they are for LegacyRefactor.ai
-          services.
+          Scan business websites and score how "upgradeable" they are for LegacyRefactor.ai services.
         </p>
 
         <div class="small-label">Run scanner</div>
@@ -216,58 +216,33 @@ python3 website_radar/website_radar.py
           <li><code>outputs/website_leads_YYYY-MM-DD.csv</code></li>
           <li><code>outputs/website_leads_YYYY-MM-DD.json</code></li>
         </ul>
-
-        <div class="pill-row">
-          <span class="pill">Lead scoring</span>
-          <span class="pill">Design age</span>
-          <span class="pill">Mobile / SEO / structure</span>
-        </div>
       </div>
 
-      <!-- OUTREACH GENERATOR (MULTI-FORMAT) -->
+      <!-- OUTREACH GENERATOR -->
       <div class="card">
         <div class="section-label">Module</div>
         <h2>Outreach Generator</h2>
         <p>
-          Turn scored leads into ready-to-send outreach in three formats:
-          cold email, short DM, and a quick audit blurb.
+          Convert your scored leads into ready-to-send outreach: full cold emails, short DMs, SMS versions,
+          call scripts, and audit bullets.
         </p>
 
-        <div class="small-label">Generate outreach bundle</div>
+        <div class="small-label">Open Tool</div>
+        <a class="pill" href="outreach.html">Open Outreach Page →</a>
+
+        <div class="small-label">Run locally</div>
         <div class="code-block">
 cd ~/opportunity-radar
 python3 website_radar/generate_website_pitch.py
         </div>
-
-        <div class="small-label">Uses</div>
-        <ul class="list">
-          <li>Top rows from <code>outputs/website_leads_*.csv</code></li>
-        </ul>
-
-        <div class="small-label">Creates</div>
-        <ul class="list">
-          <li><code>outputs/pitches/pitches_YYYY-MM-DD-HHMM.txt</code></li>
-        </ul>
-
-        <div class="small-label">Each lead includes</div>
-        <ul class="list">
-          <li><strong>Cold Email</strong> – longer, more context</li>
-          <li><strong>Short DM</strong> – quick, social-style pitch</li>
-          <li><strong>Audit Bullets</strong> – copy-paste notes or tweet-length summary</li>
-        </ul>
-
-        <p class="footer-note">
-          Workflow: run radar → run outreach generator → copy the format you need into Gmail, DMs, or your
-          outreach system.
-        </p>
       </div>
 
-      <!-- FILES & OUTPUTS OVERVIEW -->
+      <!-- FILES & OUTPUTS -->
       <div class="card">
         <div class="section-label">Reference</div>
         <h2>Files & Outputs</h2>
         <p>
-          Quick map of where everything lives so you never have to remember paths.
+          Quick map of where everything lives so you always know where to look.
         </p>
 
         <div class="small-label">Core project</div>
@@ -278,19 +253,15 @@ python3 website_radar/generate_website_pitch.py
         <div class="small-label">Important folders</div>
         <ul class="list">
           <li><code>inputs/</code> – CSVs of candidate websites</li>
-          <li><code>outputs/</code> – scored leads + outreach text files</li>
-          <li><code>website_radar/</code> – Python logic (scanner + pitches)</li>
+          <li><code>outputs/</code> – scored leads + outreach bundles</li>
+          <li><code>website_radar/</code> – Python logic</li>
         </ul>
 
-        <div class="small-label">Where to look before outreach</div>
+        <div class="small-label">Before outreach</div>
         <ul class="list">
-          <li>Top scored leads → <code>outputs/website_leads_*.csv</code></li>
-          <li>Ready text to send → <code>outputs/pitches/pitches_*.txt</code></li>
+          <li>Top leads → <code>outputs/website_leads_*.csv</code></li>
+          <li>Ready messages → <code>outputs/pitches/pitches_*.txt</code></li>
         </ul>
-
-        <p class="footer-note">
-          This card is just a mental map – if you ever forget how things connect, check here first.
-        </p>
       </div>
 
     </div>
