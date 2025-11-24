@@ -124,6 +124,27 @@
     from { opacity: 0; transform: translateY(10px); }
     to   { opacity: 1; transform: translateY(0); }
   }
+    .result-box {
+      background: #111;
+      border: 1px solid #00c776;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 25px;
+      text-align: left;
+      color: #eee;
+    }
+
+    .result-box.error {
+      border-color: red;
+      color: #ffb3b3;
+    }
+
+    #loading {
+      display: none;
+      margin-top: 20px;
+      color: #00c776;
+      font-size: 18px;
+    }
 </style>
 </head>
 
@@ -138,9 +159,12 @@
 
 <div class="scanner-box">
   <input id="urlInput" placeholder="https://example.com" />
-  <button onclick="scanSite()">Scan</button>
+  <button onclick="runScan()">Scan</button>
+      
+
 </div>
 
+<div id="loading">Scanning…</div>
 <div id="results" class="results"></div>
 
 <footer>
@@ -148,49 +172,56 @@
 </footer>
 
 <script>
-async function scanSite() {
-  const url = document.getElementById("urlInput").value.trim();
-  if (!url) return alert("Enter a URL");
+async function runScan() {
+  const input = document.getElementById("urlInput");
+  const url = input.value.trim();
+  const output = document.getElementById("results");
+  const spinner = document.getElementById("loading");
 
-  const r = document.getElementById("results");
-  r.style.display = "block";
-  r.innerHTML = "<p>Scanning...</p>";
+  output.innerHTML = "";
+  spinner.style.display = "block";
 
   try {
-    const api = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-    const response = await fetch(api);
+    const response = await fetch("https://legacyrefactor-worker.lumpier-redbuds4p.workers.dev", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url })
+    });
+
     const data = await response.json();
 
-    const html = data.contents || "";
+    spinner.style.display = "none";
 
-    const sslOK = url.startsWith("https://");
-    const titleOK = html.includes("<title>");
-    const mobileOK = html.includes("viewport");
-    const seoDescOK = html.includes("meta name=\"description\"");
-    const modernOK = html.includes("display:flex") || html.includes("flex;");
+    if (data.error) {
+      output.innerHTML = `
+        <div class="result-box error">
+          <strong>Error:</strong> ${data.error}
+        </div>
+      `;
+      return;
+    }
 
-    const badge = (ok) =>
-      ok ? "<span class='badge ok'>OK</span>" : "<span class='badge bad'>Missing</span>";
-
-    r.innerHTML = `
-      <h2>Scan Results for ${url}</h2>
-
-      <p><b>SSL:</b> ${badge(sslOK)}</p>
-      <p><b>SEO Description:</b> ${badge(seoDescOK)}</p>
-      <p><b>Mobile Responsive Tag:</b> ${badge(mobileOK)}</p>
-      <p><b>Page Title:</b> ${badge(titleOK)}</p>
-      <p><b>Modern Design Signals (flexbox/grid detected):</b> ${badge(modernOK)}</p>
-
-      <br><br>
-      <p style="color:#aaa;font-size:14px;">
-        These are lightweight indicators — for full audits, check out “Modern Website Audit.”
-      </p>
+    // Format results nicely
+    output.innerHTML = `
+      <div class="result-box">
+        <h3>Scan Results</h3>
+        <p><strong>SSL:</strong> ${data.ssl ? "Valid ✓" : "Invalid ✗"}</p>
+        <p><strong>Mobile Friendly:</strong> ${data.mobile ? "Yes ✓" : "No ✗"}</p>
+        <p><strong>SEO Title:</strong> ${data.seoTitle || "Missing"}</p>
+        <p><strong>Page Speed Score:</strong> ${data.performance || "N/A"}</p>
+      </div>
     `;
-  } catch (e) {
-    r.innerHTML = "<p style='color:red;'>Could not scan site.</p>";
+  } catch (err) {
+    spinner.style.display = "none";
+    output.innerHTML = `
+      <div class="result-box error">
+        <strong>Unexpected Error:</strong> ${err.message}
+      </div>
+    `;
   }
 }
 </script>
+
 
 </body>
 </html>
