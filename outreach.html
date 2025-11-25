@@ -310,273 +310,47 @@
 </footer>
 
 <script>
-function buildTemplates(name, url, contact, tone, notes) {
-  const safeName   = name || "this business";
-  const safeUrl    = url || "(no website provided)";
-  const safeNotes  = notes || "";
-  const contactLine = contact ? contact + "," : "there,";
+async function generateOutreach() {
+  const business = document.getElementById("business").value.trim();
+  const url = document.getElementById("url").value.trim();
+  const contact = document.getElementById("contact").value.trim();
+  const notes = document.getElementById("notes").value.trim();
+  const tone = document.getElementById("tone").value;
 
-  let vibeEmailIntro = "";
-  let vibeSmsIntro   = "";
-  let vibeDmIntro    = "";
-  let vibeCallIntro  = "";
-
-  if (tone === "chill") {
-    vibeEmailIntro = "I came across " + safeName + " online and really liked what you’re doing.";
-    vibeSmsIntro   = "I found " + safeName + " online and thought a quick note might be helpful.";
-    vibeDmIntro    = "I’ve been checking out " + safeName + " and wanted to share something quick.";
-    vibeCallIntro  = "I’ve been looking at " + safeName + " and wanted to run a simple upgrade idea by you.";
-  } else if (tone === "direct") {
-    vibeEmailIntro = "I noticed a few easy wins on " + safeName + "’s site that could help with conversions and clarity.";
-    vibeSmsIntro   = "Saw a few quick wins on your site that might be worth fixing.";
-    vibeDmIntro    = "Spotted several simple improvements on your site that could make a difference.";
-    vibeCallIntro  = "I’m calling because I see a few specific things on your site that are slowing it down.";
-  } else {
-    // professional
-    vibeEmailIntro = "I’ve been reviewing " + safeName + "’s online presence and noticed a few opportunities to modernize the site.";
-    vibeSmsIntro   = "I’ve reviewed your site and noticed a few areas that could be modernized.";
-    vibeDmIntro    = "I’ve taken a brief look at your website and saw some clear modernization opportunities.";
-    vibeCallIntro  = "I’m reaching out because I see a few straightforward improvements that could make your site easier to use and more effective.";
-  }
-
-  const optionalNotesLine = safeNotes
-    ? "\\n\\nContext from my notes:\\n- " + safeNotes
-    : "";
-
-  const email =
-`Subject: Quick website upgrade ideas for ${safeName}
-
-Hi ${contactLine}
-
-${vibeEmailIntro}
-
-Right now, your site at ${safeUrl} looks like it could benefit from:
-
-- Cleaning up the layout for faster scanning on mobile and desktop
-- Tightening the calls to action so visitors know exactly what to do next
-- Updating visuals and spacing so it feels more current and trustworthy
-
-I run LegacyRefactor.ai, where I modernize websites and legacy codebases without breaking what already works. Most clients keep their brand, but gain a faster, clearer, more conversion-friendly site.
-
-Would you be open to a short call to walk through a few concrete changes tailored to ${safeName}?
-
-Best,
-[Your name]
-LegacyRefactor.ai${optionalNotesLine}`;
-
-  const sms =
-`Hey ${contact || "there"} — this is [Your name] from LegacyRefactor.ai.
-
-I took a quick look at ${safeUrl} and noticed a few simple upgrades
-(clarity, mobile layout, calls to action) that could make it easier for
-customers to work with you.
-
-If you’d like, I can share a short summary and some before/after ideas.`;
-
-  const dm =
-`Hi ${contact || "there"},
-
-I’ve been looking at ${safeName} and your site at ${safeUrl}. There are a few
-straightforward wins around layout, mobile usability, and how your services are
-explained that could make a real difference.
-
-At LegacyRefactor.ai I specialize in modernizing websites and legacy code
-without forcing a full rebuild from scratch.
-
-If you’re open to it, I’d be happy to send over a quick, visual breakdown of
-what I’d change and why.`;
-
-  const callScript =
-`Intro:
-"Hi, is this ${contact || "the owner or person who handles the website"} at ${safeName}? 
-My name is [Your name] from LegacyRefactor.ai."
-
-Context:
-"I took a brief look at your site at ${safeUrl}. I focus on modernizing
-websites and older codebases without breaking what already works."
-
-Observations:
-- A few spots where the layout and spacing make it harder to scan quickly
-- Some opportunities to make the calls to action clearer
-- A chance to modernize visuals so the site feels more current and trustworthy${safeNotes ? "\\n- Your specific context: " + safeNotes : ""}
-
-Offer:
-"I’m not calling to sell you something on this call — I just wanted to see if
-you’d be open to a short follow-up where I share a simple before/after mock and
-a few options at different budget levels."
-
-Close:
-"Would it be okay if I email you a brief summary and a few specific ideas to
-consider?"`;
-
-  const audit =
-`Quick Website Audit for ${safeName} (${safeUrl})
-
-Layout & Structure:
-- Main sections could be simplified so visitors understand what you offer faster
-- Consider clearer visual hierarchy (headlines, subheadings, spacing)
-
-Mobile Experience:
-- Check how key pages feel on a smaller screen
-- Buttons and links should be easy to tap with thumbs
-
-Messaging & Clarity:
-- Make the primary offer and next step obvious above the fold
-- Use concise headlines that match what customers are searching for
-
-Visuals & Trust:
-- Update fonts, spacing, and imagery so the site feels aligned with 2025 expectations
-- Add or surface testimonials, reviews, or proof to build confidence
-
-Next Steps:
-- Decide whether this is a light refresh (audit + tweaks) or a full redesign
-- Book a quick call with LegacyRefactor.ai to walk through options tailored to ${safeName}.`;
-
-  return { email, sms, dm, callScript, audit };
-}
-
-function generateSingle() {
-  const name    = document.getElementById("bizName").value.trim();
-  const url     = document.getElementById("bizUrl").value.trim();
-  const contact = document.getElementById("contactName").value.trim();
-  const tone    = document.getElementById("tone").value;
-  const notes   = document.getElementById("notes").value.trim();
-
-  if (!name && !url) {
-    alert("Add at least a business name or website URL.");
+  if (!business || !url) {
+    alert("Business name and URL are required.");
     return;
   }
 
-  const t = buildTemplates(name, url, contact, tone, notes);
+  document.getElementById("preview").innerHTML = "<p style='color:#0f0;'>Generating…</p>";
 
-  const html =
-    `<div class="output-block">
-       <h3>Email</h3>
-       <pre>${t.email}</pre>
-     </div>
-     <div class="output-block">
-       <h3>SMS</h3>
-       <pre>${t.sms}</pre>
-     </div>
-     <div class="output-block">
-       <h3>LinkedIn DM</h3>
-       <pre>${t.dm}</pre>
-     </div>
-     <div class="output-block">
-       <h3>Call Script</h3>
-       <pre>${t.callScript}</pre>
-     </div>
-     <div class="output-block">
-       <h3>Audit Bullets</h3>
-       <pre>${t.audit}</pre>
-     </div>`;
+  const response = await fetch("https://legacyrefactor-worker.lumpier-redbuds4p.workers.dev", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      business_name: business,
+      url,
+      contact_name: contact,
+      notes,
+      tone
+    })
+  });
 
-  document.getElementById("singleOutput").innerHTML = html;
-}
+  const data = await response.json();
 
-function clearSingle() {
-  document.getElementById("bizName").value = "";
-  document.getElementById("bizUrl").value = "";
-  document.getElementById("contactName").value = "";
-  document.getElementById("tone").value = "professional";
-  document.getElementById("notes").value = "";
-  document.getElementById("singleOutput").innerHTML =
-    '<p style="font-size: 13px; color:#aaaaaa;">Fill in the fields on the left and click “Generate Outreach” to see your messages here.</p>';
-}
-
-function copySingle() {
-  const container = document.getElementById("singleOutput");
-  const text = container.innerText || container.textContent;
-  if (!text.trim()) {
-    alert("Nothing to copy yet — generate outreach first.");
-    return;
-  }
-  navigator.clipboard.writeText(text).then(
-    () => alert("Single-lead outreach copied to clipboard."),
-    () => alert("Could not copy. You can still select and copy manually.")
-  );
-}
-
-function generateFromCsv() {
-  const fileInput = document.getElementById("csvFile");
-  const file = fileInput.files[0];
-
-  if (!file) {
-    alert("Choose a CSV file first.");
+  if (data.error) {
+    document.getElementById("preview").innerHTML = `<p style='color:red;'>Error: ${data.error}</p>`;
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    const text = e.target.result;
-    const lines = text.split(/\r?\n/).filter(line => line.trim().length > 0);
-    if (lines.length < 2) {
-      alert("CSV looks empty or only has a header row.");
-      return;
-    }
-
-    const headers = lines[0].split(",").map(h => h.trim().toLowerCase());
-    const idxName    = headers.indexOf("business_name");
-    const idxUrl     = headers.indexOf("url");
-    const idxContact = headers.indexOf("contact_name");
-
-    let out = "";
-    for (let i = 1; i < lines.length; i++) {
-      const cols = lines[i].split(",");
-      if (!cols.length) continue;
-
-      const name    = idxName    >= 0 ? (cols[idxName]    || "").trim() : "";
-      const url     = idxUrl     >= 0 ? (cols[idxUrl]     || "").trim() : "";
-      const contact = idxContact >= 0 ? (cols[idxContact] || "").trim() : "";
-
-      if (!name && !url) continue;
-
-      const t = buildTemplates(name, url, contact, "professional", "");
-
-      out +=
-`========================================
-Business: ${name || "(no name)"}
-URL: ${url || "(no url)"}
-Contact: ${contact || "(no contact)"}
-========================================
-
-[EMAIL]
-${t.email}
-
-[SMS]
-${t.sms}
-
-[LINKEDIN DM]
-${t.dm}
-
-[CALL SCRIPT]
-${t.callScript}
-
-[AUDIT BULLETS]
-${t.audit}
-
-\n\n`;
-    }
-
-    document.getElementById("bulkOutput").value = out || "No valid rows found in the CSV.";
-  };
-
-  reader.readAsText(file);
-}
-
-function copyBulk() {
-  const area = document.getElementById("bulkOutput");
-  const text = area.value;
-  if (!text.trim()) {
-    alert("No bulk output to copy yet.");
-    return;
-  }
-  navigator.clipboard.writeText(text).then(
-    () => alert("Bulk outreach copied to clipboard."),
-    () => alert("Could not copy. You can still select and copy manually.")
-  );
+  document.getElementById("preview").innerHTML = `
+    <h3>Email</h3><pre>${data.email}</pre>
+    <h3>SMS</h3><pre>${data.sms}</pre>
+    <h3>LinkedIn DM</h3><pre>${data.linkedin}</pre>
+    <h3>Call Script</h3><pre>${data.call_script}</pre>
+    <h3>Audit Bullets</h3><pre>${data.audit}</pre>
+  `;
 }
 </script>
-
 </body>
 </html>
